@@ -2,9 +2,11 @@
   "name": "keshatv-file-uploader",
   "version": "1.0.0",
   "description": "",
+  "private": true,
   "preferGlobal": true,
   "bin": {
-    "keshatv":  "./src/index.mjs"
+    "keshatv":  "./src/index.mjs",
+    "keshatv-hls":  "./create-hls.sh"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
