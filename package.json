@@ -5,8 +5,10 @@
   "private": true,
   "preferGlobal": true,
   "bin": {
-    "keshatv":  "./src/index.mjs",
-    "keshatv-hls":  "./create-hls.sh"
+    "keshatv": "./src/index.mjs",
+    "keshatv-hls": "./create-hls.sh",
+    "keshatv-hls-480p": "./create-hls-480p.sh",
+    "keshatv-hls-360p": "./create-hls-360p.sh"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,6 +17,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ipld/car": "^3.2.3",
+    "ipfs-car": "^0.6.1",
     "web3.storage": "^3.5.1"
   }
 }
