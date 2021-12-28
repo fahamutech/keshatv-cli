@@ -1,15 +1,16 @@
 {
   "name": "keshatv-file-uploader",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "private": true,
   "preferGlobal": true,
   "bin": {
-    "keshatv.upload": "./src/index.mjs",
-    "keshatv.db.movie.add": "./src/add-movie.mjs",
-    "keshatv.convert.hls": "./create-hls.sh",
-    "keshatv.convert.hls.480p": "./create-hls-480p.sh",
-    "keshatv.convert.hls.360p": "./create-hls-360p.sh"
+    "keshatv.upload.content": "src/upload-content.mjs",
+    "keshatv.upload.website": "src/upload-website.mjs",
+    "keshatv.db.movie.add": "src/add-movie.mjs",
+    "keshatv.convert.hls": "create-hls.sh",
+    "keshatv.convert.hls.480p": "create-hls-480p.sh",
+    "keshatv.convert.hls.360p": "create-hls-360p.sh"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,6 +20,7 @@
   "license": "ISC",
   "dependencies": {
     "@ipld/car": "^3.2.3",
+    "bfast": "^6.0.0-alpha.18",
     "ipfs-car": "^0.6.1",
     "is-ipfs": "^6.0.2",
     "web3.storage": "^3.5.1"
