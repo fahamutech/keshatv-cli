@@ -1,4 +1,4 @@
-const WEB_3_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEI5YTAxYTI1MjE2MTJkMjY2NDQ4NDMyMjlGMzk2QzljNzU0N0IyY0IiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2Mzk5MzIyMTM3NzAsIm5hbWUiOiJrZXNoYXR2LXVwbG9hZGVyIn0.gpB0pHd9apCG_H3BAiI65LSdqbd9F3TVdiWRE1FBf9I"
+const WEB_3_TOKEN = process.env.WEB_3_TOKEN;
 
 import {getFilesFromPath, File} from 'web3.storage'
 import {Web3Storage} from 'web3.storage'
@@ -25,7 +25,7 @@ export async function getFiles(path) {
     return files
 }
 
-export async function storeWithProgress(files) {
+export async function storeWithProgress(files, inputFolder = null) {
     const onRootCidReady = cid => {
         console.log('uploading files with cid:', cid)
     }
@@ -39,7 +39,7 @@ export async function storeWithProgress(files) {
     const client = makeStorageClient()
     console.log("start pack files");
     const a = await packToFs({
-        input: hlsPath,
+        input: inputFolder ? inputFolder : hlsPath,
         output: carPath,
         blockstore: new FsBlockStore(),
         wrapWithDirectory: false,
@@ -48,8 +48,16 @@ export async function storeWithProgress(files) {
     const car = await CarIndexedReader.fromFile(carPath)
     const cid = await client.putCar(car, {onStoredChunk});
     await writeFile(cidResultPath, cid);
-    await rm(hlsPath, {recursive: true});
-    await rm(carPath);
+    try {
+        await rm(hlsPath, {recursive: true});
+    } catch (e1) {
+        console.log(e1.toString())
+    }
+    try {
+        await rm(carPath);
+    } catch (e2) {
+        console.log(e2.toString())
+    }
     return cid;
 }
 
